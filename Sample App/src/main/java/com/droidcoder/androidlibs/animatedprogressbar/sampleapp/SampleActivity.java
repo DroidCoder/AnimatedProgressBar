@@ -36,10 +36,6 @@ public class SampleActivity extends ActionBarActivity {
         ViewGroup viewGroup = (ViewGroup)getWindow().getDecorView();
         walkOnViews(viewGroup);
 
-//        animatedProgressBarList.add((AnimatedProgressBar) findViewById(R.id.AnimatedProgressBar1));
-//        animatedProgressBarList.add((AnimatedProgressBar) findViewById(R.id.AnimatedProgressBar2));
-//        animatedProgressBarList.add((AnimatedProgressBar) findViewById(R.id.AnimatedProgressBar3));
-
         findViewById(R.id.bnt_start).setOnClickListener(new OnStartClick());
         findViewById(R.id.bnt_stop).setOnClickListener(new OnStoptClick());
         findViewById(R.id.bnt_reset).setOnClickListener(new OnResetClick());

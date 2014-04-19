@@ -11,10 +11,10 @@
     <string name="stop">stop</string>
     <string name="reset">reset</string>
 
-    <string name="category_1">1. Animated main and secondary process:</string>
-    <string name="category_2">2. Animated main process only:</string>
-    <string name="category_3">3. Animation on Loop:</string>
-    <string name="category_4">3. Styles Examples:</string>
+    <string name="category_1">1/4 Animated main and secondary process:</string>
+    <string name="category_2">2/4 Animated main process only:</string>
+    <string name="category_3">3/4 Animation on Loop:</string>
+    <string name="category_4">4/4 Styles Examples:</string>
 
 
 </resources>
