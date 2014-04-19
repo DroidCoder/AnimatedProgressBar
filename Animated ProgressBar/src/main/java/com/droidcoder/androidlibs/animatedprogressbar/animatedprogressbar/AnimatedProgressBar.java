@@ -45,10 +45,16 @@ public class AnimatedProgressBar extends ProgressBar{
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.animatedprogressbar, 0, 0);
 
-        animateOnAttached = a.getBoolean(R.styleable.animatedprogressbar_animate_when_first_show, true);
-        animationLoop = a.getBoolean(R.styleable.animatedprogressbar_animation_loop, false);
-        animateSecondary = a.getBoolean(R.styleable.animatedprogressbar_animate_secondary_process, true);
-        animateSecondaryStep = a.getInt(R.styleable.animatedprogressbar_animate_secondary_process_step, 1);
+        try {
+            animateOnAttached = a.getBoolean(R.styleable.animatedprogressbar_animate_when_first_show, true);
+            animationLoop = a.getBoolean(R.styleable.animatedprogressbar_animation_loop, false);
+            animateSecondary = a.getBoolean(R.styleable.animatedprogressbar_animate_secondary_process, true);
+            animateSecondaryStep = a.getInt(R.styleable.animatedprogressbar_animate_secondary_process_step, 1);
+        }catch (Exception e){
+
+        }finally {
+            a.recycle();
+        }
     }
 
 
