@@ -9,10 +9,18 @@
     android:orientation="vertical"
     tools:context="com.droidcoder.androidlibs.animatedprogressbar.sampleapp.SampleActivity">
 
+    <Button
+        android:id="@+id/bnt_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/info"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"/>
+
 
     <LinearLayout
         android:id="@+id/button_group"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/bnt_info"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="100"
-                app:animate_secondary_process_step="1"
+                app:animate_secondary_process_step="5"
                 tools:progress="80"/>
 
             <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar

@@ -9,9 +9,11 @@
 
 package com.droidcoder.androidlibs.animatedprogressbar.sampleapp;
 
-import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,6 +26,10 @@ import java.util.List;
 public class SampleActivity extends ActionBarActivity {
 
     private List<AnimatedProgressBar> animatedProgressBarList;
+
+    private static final String GITHUB_URL  = "https://github.com/DroidCoder";
+
+    private static final String LOGGER_TAG = "AnimatedProgressBar";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,8 @@ public class SampleActivity extends ActionBarActivity {
         findViewById(R.id.bnt_start).setOnClickListener(new OnStartClick());
         findViewById(R.id.bnt_stop).setOnClickListener(new OnStoptClick());
         findViewById(R.id.bnt_reset).setOnClickListener(new OnResetClick());
+
+        findViewById(R.id.bnt_info).setOnClickListener(new OnInfoClick());
 
 
     }
@@ -72,6 +80,20 @@ public class SampleActivity extends ActionBarActivity {
         }
     }
 
+    private class OnInfoClick implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_URL));
+                startActivity(browserIntent);
+            }catch (Exception e){
+                Log.e(LOGGER_TAG, "Exception "+e.getMessage());
+                Log.d(LOGGER_TAG, "Exception Details",e);
+            }
+
+        }
+    }
+
 
     private void walkOnViews(ViewGroup viewGroup){
         for (int i = 0; i < viewGroup.getChildCount(); i++){
@@ -79,7 +101,7 @@ public class SampleActivity extends ActionBarActivity {
             if(view instanceof ViewGroup){
                 walkOnViews((ViewGroup) view);
             }else if(view instanceof AnimatedProgressBar){
-                animatedProgressBarList.add((AnimatedProgressBar)view);
+                animatedProgressBarList.add((AnimatedProgressBar) view);
             }
         }
     }
