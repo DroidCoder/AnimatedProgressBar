@@ -27,7 +27,7 @@ public class SampleActivity extends ActionBarActivity {
 
     private List<AnimatedProgressBar> animatedProgressBarList;
 
-    private static final String GITHUB_URL  = "https://github.com/DroidCoder";
+    private static final String GITHUB_URL  = "https://github.com/DroidCoder/AnimatedProgressBar";
 
     private static final String LOGGER_TAG = "AnimatedProgressBar";
 
