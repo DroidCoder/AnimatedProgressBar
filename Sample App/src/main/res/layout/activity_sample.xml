@@ -12,23 +12,57 @@
 
     <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
        style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+        android:id="@+id/AnimatedProgressBar1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progress="80"
-        android:secondaryProgress="85"/>
+        android:progress="15"
+        android:max="100"/>
 
     <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
         style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+        android:id="@+id/AnimatedProgressBar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progress="80"
-        android:secondaryProgress="85"/>
+        android:progress="15"
+        android:max="175"/>
 
     <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
         style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+        android:id="@+id/AnimatedProgressBar3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progress="80"
-        android:secondaryProgress="85"/>
+        android:progress="15"
+        android:max="320"/>
+
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/bnt_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/start"/>
+
+        <Button
+            android:id="@+id/bnt_stop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/stop"/>
+
+        <Button
+            android:id="@+id/bnt_reset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reset"/>
+
+        </LinearLayout>
+
 
 </LinearLayout>

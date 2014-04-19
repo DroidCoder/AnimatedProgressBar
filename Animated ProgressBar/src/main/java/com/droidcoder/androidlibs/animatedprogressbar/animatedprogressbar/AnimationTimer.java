@@ -9,71 +9,64 @@
 
 package com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.widget.ProgressBar;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by athanasioskarpouzis on 4/19/14.
  */
-public class AnimatedProgressBar extends ProgressBar{
+public class AnimationTimer{
+    private static AnimationTimer ourInstance;
 
-    private boolean animating = false;
+    private Timer timer;
+    private ConcurrentHashMap<Integer, TimerTickListener> listeners;
 
-    private TimerTickListener myListener;
 
-
-    public AnimatedProgressBar(Context context, AttributeSet attrs){
-        super(context, attrs, android.R.style.Widget_ProgressBar_Horizontal);
+    public static synchronized  AnimationTimer getInstance() {
+        if(ourInstance == null){
+            ourInstance = new AnimationTimer();
+        }
+        return ourInstance;
     }
 
-    private void init(){
 
-        if(!isInEditMode()){
+    public boolean addListener(TimerTickListener timerTickListener){
+        TimerTickListener v = listeners.put(timerTickListener.hashCode(), timerTickListener);
+        if( (timer == null) || ((v == null) && (listeners.size() == 1))){
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new AnimationTimerTask(), 0, 100);
+        }
+        return (v == null);
+    }
 
+    public boolean removeListener(TimerTickListener timerTickListener){
+        TimerTickListener v =  listeners.remove(timerTickListener.hashCode());
+        if((v != null) && (listeners.size() == 0)){
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
+        return (v != null);
+    }
+
+
+    private AnimationTimer() {
+        listeners = new ConcurrentHashMap<Integer, TimerTickListener>();
+
+    }
+
+
+    private class AnimationTimerTask extends TimerTask{
+        @Override
+        public void run() {
+               for(TimerTickListener listener : listeners.values()){
+                    listener.onTimerTick();
+               }
         }
     }
 
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        startDefaultAnimation();
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        stopDefaultAnimation();
-    }
-
-    public void startDefaultAnimation(){
-        if(animating){
-            return;
-        }
-        animating = true;
-        myListener = new TimerTickListener() {
-            @Override
-            public void onTimerTick() {
-                setProgress(getProgress()+1);
-                if(getProgress() >= getMax()){
-                    stopDefaultAnimation();
-                }
-            }
-        };
-        AnimationTimer.getInstance().addListener(myListener);
-    }
-
-    public void stopDefaultAnimation(){
-        if(!animating){
-            return;
-        }
-        animating = false;
-        AnimationTimer.getInstance().removeListener(myListener);
-    }
-
-
-    public boolean isAnimating() {
-        return animating;
-    }
 }

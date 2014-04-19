@@ -9,71 +9,11 @@
 
 package com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.widget.ProgressBar;
-
 /**
  * Created by athanasioskarpouzis on 4/19/14.
  */
-public class AnimatedProgressBar extends ProgressBar{
+public interface TimerTickListener {
 
-    private boolean animating = false;
+    public void onTimerTick();
 
-    private TimerTickListener myListener;
-
-
-    public AnimatedProgressBar(Context context, AttributeSet attrs){
-        super(context, attrs, android.R.style.Widget_ProgressBar_Horizontal);
-    }
-
-    private void init(){
-
-        if(!isInEditMode()){
-
-        }
-    }
-
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        startDefaultAnimation();
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        stopDefaultAnimation();
-    }
-
-    public void startDefaultAnimation(){
-        if(animating){
-            return;
-        }
-        animating = true;
-        myListener = new TimerTickListener() {
-            @Override
-            public void onTimerTick() {
-                setProgress(getProgress()+1);
-                if(getProgress() >= getMax()){
-                    stopDefaultAnimation();
-                }
-            }
-        };
-        AnimationTimer.getInstance().addListener(myListener);
-    }
-
-    public void stopDefaultAnimation(){
-        if(!animating){
-            return;
-        }
-        animating = false;
-        AnimationTimer.getInstance().removeListener(myListener);
-    }
-
-
-    public boolean isAnimating() {
-        return animating;
-    }
 }

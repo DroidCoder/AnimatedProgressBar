@@ -9,39 +9,84 @@
 
 package com.droidcoder.androidlibs.animatedprogressbar.sampleapp;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SampleActivity extends ActionBarActivity {
+
+    private List<AnimatedProgressBar> animatedProgressBarList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
+
+
+        animatedProgressBarList = new ArrayList<AnimatedProgressBar>();
+
+        ViewGroup viewGroup = (ViewGroup)getWindow().getDecorView();
+        walkOnViews(viewGroup);
+
+//        animatedProgressBarList.add((AnimatedProgressBar) findViewById(R.id.AnimatedProgressBar1));
+//        animatedProgressBarList.add((AnimatedProgressBar) findViewById(R.id.AnimatedProgressBar2));
+//        animatedProgressBarList.add((AnimatedProgressBar) findViewById(R.id.AnimatedProgressBar3));
+
+        findViewById(R.id.bnt_start).setOnClickListener(new OnStartClick());
+        findViewById(R.id.bnt_stop).setOnClickListener(new OnStoptClick());
+        findViewById(R.id.bnt_reset).setOnClickListener(new OnResetClick());
+
+
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.sample, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+    private class OnStartClick implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            for(AnimatedProgressBar animatedProgressBar : animatedProgressBarList){
+                animatedProgressBar.startDefaultAnimation();
+            }
         }
-        return super.onOptionsItemSelected(item);
     }
+
+    private class OnStoptClick implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            for(AnimatedProgressBar animatedProgressBar : animatedProgressBarList){
+                animatedProgressBar.stopDefaultAnimation();
+            }
+        }
+    }
+
+    private class OnResetClick implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            for(AnimatedProgressBar animatedProgressBar : animatedProgressBarList){
+                animatedProgressBar.setProgress(0);
+            }
+        }
+    }
+
+
+    private void walkOnViews(ViewGroup viewGroup){
+        for (int i = 0; i < viewGroup.getChildCount(); i++){
+            View view = viewGroup.getChildAt(i);
+            if(view instanceof ViewGroup){
+                walkOnViews((ViewGroup) view);
+            }else if(view instanceof AnimatedProgressBar){
+                animatedProgressBarList.add((AnimatedProgressBar)view);
+            }
+        }
+    }
+
+
 
 }

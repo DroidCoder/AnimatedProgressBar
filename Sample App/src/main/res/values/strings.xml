@@ -7,4 +7,8 @@
 
     <string name="app_title">Sample App for Animated ProgressBar library</string>
 
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+    <string name="reset">reset</string>
+
 </resources>
