@@ -10,6 +10,9 @@
 package com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
@@ -18,27 +21,43 @@ import android.widget.ProgressBar;
  */
 public class AnimatedProgressBar extends ProgressBar{
 
+    private static final String INSTANCE_STATE = "com.droidcoder.androidlibs.animatedprogressbar.INSTANCE_STATE";
+    private static final String ANIMATE_ON_ATTACHED = "com.droidcoder.androidlibs.animatedprogressbar.ANIMATE_ON_ATTACHED";
+    private static final String ANIMATION_LOOP = "com.droidcoder.androidlibs.animatedprogressbar.ANIMATION_LOOP";
+    private static final String ANIMATE_SECONDARY = "com.droidcoder.androidlibs.animatedprogressbar.ANIMATE_SECONDARY";
+    private static final String ANIMATE_SECONDARY_STEP = "com.droidcoder.androidlibs.animatedprogressbar.ANIMATE_SECONDARY_STEP";
+    private static final String IS_ANIMATING = "com.droidcoder.androidlibs.animatedprogressbar.IS_ANIMATING";
+
+
+    private boolean animateOnAttached;
+    private boolean animationLoop;
+    private boolean animateSecondary;
+    private int animateSecondaryStep;
+
     private boolean animating = false;
+    private boolean restored = false;
 
     private TimerTickListener myListener;
 
 
     public AnimatedProgressBar(Context context, AttributeSet attrs){
         super(context, attrs, android.R.style.Widget_ProgressBar_Horizontal);
-    }
 
-    private void init(){
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.animatedprogressbar, 0, 0);
 
-        if(!isInEditMode()){
-
-        }
+        animateOnAttached = a.getBoolean(R.styleable.animatedprogressbar_animate_when_first_show, true);
+        animationLoop = a.getBoolean(R.styleable.animatedprogressbar_animation_loop, false);
+        animateSecondary = a.getBoolean(R.styleable.animatedprogressbar_animate_secondary_process, true);
+        animateSecondaryStep = a.getInt(R.styleable.animatedprogressbar_animate_secondary_process_step, 1);
     }
 
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        startDefaultAnimation();
+        if(animateOnAttached || (animating && restored)){
+            startDefaultAnimation();
+        }
     }
 
     @Override
@@ -48,7 +67,8 @@ public class AnimatedProgressBar extends ProgressBar{
     }
 
     public void startDefaultAnimation(){
-        if(animating){
+        if((animating && (!restored))){
+            restored = false;
             return;
         }
         animating = true;
@@ -56,8 +76,20 @@ public class AnimatedProgressBar extends ProgressBar{
             @Override
             public void onTimerTick() {
                 setProgress(getProgress()+1);
+                if(animateSecondary) {
+                    if(getSecondaryProgress() <= getProgress()) {
+                        setSecondaryProgress(getProgress() + animateSecondaryStep);
+                    }
+                }
                 if(getProgress() >= getMax()){
-                    stopDefaultAnimation();
+                    if(animationLoop){
+                        setProgress(0);
+                        if(animateSecondary){
+                            setSecondaryProgress(animateSecondaryStep);
+                        }
+                    }else {
+                        stopDefaultAnimation();
+                    }
                 }
             }
         };
@@ -73,6 +105,38 @@ public class AnimatedProgressBar extends ProgressBar{
     }
 
 
+    // save state
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(INSTANCE_STATE, super.onSaveInstanceState());
+        bundle.putBoolean(ANIMATE_ON_ATTACHED, animateOnAttached);
+        bundle.putBoolean(ANIMATION_LOOP, animationLoop);
+        bundle.putBoolean(ANIMATE_SECONDARY, animateSecondary);
+        bundle.putInt(ANIMATE_SECONDARY_STEP, animateSecondaryStep);
+        bundle.putBoolean(IS_ANIMATING, isAnimating());
+        return bundle;
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            Bundle bundle = (Bundle) state;
+            state = bundle.getParcelable(INSTANCE_STATE);
+            animateOnAttached = bundle.getBoolean(ANIMATE_ON_ATTACHED, true);
+            animationLoop = bundle.getBoolean(ANIMATION_LOOP, false);
+            animateSecondary = bundle.getBoolean(ANIMATE_SECONDARY, true);
+            animateSecondaryStep = bundle.getInt(ANIMATE_SECONDARY_STEP, 1);
+            animating = bundle.getBoolean(IS_ANIMATING, false);
+            restored = true;
+        }
+        super.onRestoreInstanceState(state);
+
+    }
+
+
+
+    // getter setters
     public boolean isAnimating() {
         return animating;
     }

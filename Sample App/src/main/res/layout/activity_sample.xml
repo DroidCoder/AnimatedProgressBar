@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,32 +10,9 @@
     tools:context="com.droidcoder.androidlibs.animatedprogressbar.sampleapp.SampleActivity">
 
 
-    <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
-       style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
-        android:id="@+id/AnimatedProgressBar1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:progress="15"
-        android:max="100"/>
-
-    <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
-        style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
-        android:id="@+id/AnimatedProgressBar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:progress="15"
-        android:max="175"/>
-
-    <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
-        style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
-        android:id="@+id/AnimatedProgressBar3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:progress="15"
-        android:max="320"/>
-
-
     <LinearLayout
+        android:id="@+id/button_group"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +39,184 @@
             android:layout_weight="1"
             android:text="@string/reset"/>
 
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_above="@id/button_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/category_1"
+                android:layout_marginBottom="10dp"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                app:animate_secondary_process_step="10"
+                tools:progress="80"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="170"
+                app:animate_secondary_process_step="10"
+                tools:progress="80"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="300"
+                app:animate_secondary_process_step="10"
+                tools:progress="80"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="1700"
+                app:animate_secondary_process_step="10"
+                tools:progress="80"/>
+
+            <View
+                android:layout_margin="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/category_2"
+                android:layout_marginBottom="10dp"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                app:animate_secondary_process="false"
+                tools:progress="80"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="150"
+                app:animate_secondary_process="false"
+                tools:progress="80"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="500"
+                app:animate_secondary_process="false"
+                tools:progress="80"/>
+
+            <View
+                android:layout_margin="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/category_3"
+                android:layout_marginBottom="10dp"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                app:animate_secondary_process="false"
+                app:animation_loop="true"
+                tools:progress="80"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="120"
+                app:animate_secondary_process_step="3"
+                app:animation_loop="true"
+                tools:progress="80"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="170"
+                app:animate_secondary_process="true"
+                app:animation_loop="true"
+                tools:progress="80"/>
+
+            <View
+                android:layout_margin="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/category_4"
+                android:layout_marginBottom="10dp"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                app:animate_secondary_process="false"
+                tools:progress="80"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="120"
+                tools:progress="80"/>
+
+            <com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.AnimatedProgressBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="170"
+                app:animate_secondary_process="false"
+                tools:progress="80"/>
+
         </LinearLayout>
 
+    </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

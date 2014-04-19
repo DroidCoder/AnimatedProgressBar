@@ -71,6 +71,7 @@ public class SampleActivity extends ActionBarActivity {
         public void onClick(View v) {
             for(AnimatedProgressBar animatedProgressBar : animatedProgressBarList){
                 animatedProgressBar.setProgress(0);
+                animatedProgressBar.setSecondaryProgress(0);
             }
         }
     }
