@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
  */
 public class AnimatedProgressBar extends ProgressBar{
 
+
     private static final String INSTANCE_STATE = "com.droidcoder.androidlibs.animatedprogressbar.INSTANCE_STATE";
     private static final String ANIMATE_ON_ATTACHED = "com.droidcoder.androidlibs.animatedprogressbar.ANIMATE_ON_ATTACHED";
     private static final String ANIMATION_LOOP = "com.droidcoder.androidlibs.animatedprogressbar.ANIMATION_LOOP";
@@ -61,7 +62,10 @@ public class AnimatedProgressBar extends ProgressBar{
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if(animateOnAttached || (animating && restored)){
+        if((animating && restored)){
+            startDefaultAnimation();
+        }
+        if(animateOnAttached && !restored){
             startDefaultAnimation();
         }
     }
@@ -73,10 +77,13 @@ public class AnimatedProgressBar extends ProgressBar{
     }
 
     public void startDefaultAnimation(){
-        if((animating && (!restored))){
-            restored = false;
-            return;
-        }
+       if(restored){
+           restored = false;
+       }else{
+           if(animating){
+               return;
+           }
+       }
         animating = true;
         myListener = new TimerTickListener() {
             @Override
@@ -141,9 +148,55 @@ public class AnimatedProgressBar extends ProgressBar{
     }
 
 
-
     // getter setters
     public boolean isAnimating() {
         return animating;
+    }
+
+
+    public boolean isAnimateOnAttached() {
+        return animateOnAttached;
+    }
+
+    public void setAnimateOnAttached(boolean animateOnAttached) {
+        this.animateOnAttached = animateOnAttached;
+    }
+
+    public boolean isAnimationLoop() {
+        return animationLoop;
+    }
+
+    public void setAnimationLoop(boolean animationLoop) {
+        this.animationLoop = animationLoop;
+    }
+
+    public boolean isAnimateSecondary() {
+        return animateSecondary;
+    }
+
+    public void setAnimateSecondary(boolean animateSecondary) {
+        this.animateSecondary = animateSecondary;
+    }
+
+    public int getAnimateSecondaryStep() {
+        return animateSecondaryStep;
+    }
+
+    public void setAnimateSecondaryStep(int animateSecondaryStep) {
+        this.animateSecondaryStep = animateSecondaryStep;
+    }
+
+    @Override
+    public String toString() {
+        return "AnimatedProgressBar{" +
+                "id="+getId()+
+                ", tag="+getTag()+
+                ", restored=" + restored +
+                ", animateOnAttached=" + animateOnAttached +
+                ", animationLoop=" + animationLoop +
+                ", animateSecondary=" + animateSecondary +
+                ", animateSecondaryStep=" + animateSecondaryStep +
+                ", animating=" + animating +
+                '}';
     }
 }

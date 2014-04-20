@@ -21,6 +21,8 @@ import com.droidcoder.androidlibs.animatedprogressbar.animatedprogressbar.Animat
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 
 public class SampleActivity extends ActionBarActivity {
@@ -101,6 +103,7 @@ public class SampleActivity extends ActionBarActivity {
             if(view instanceof ViewGroup){
                 walkOnViews((ViewGroup) view);
             }else if(view instanceof AnimatedProgressBar){
+                view.setId(1234);
                 animatedProgressBarList.add((AnimatedProgressBar) view);
             }
         }
