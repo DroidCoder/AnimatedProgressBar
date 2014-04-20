@@ -1,15 +1,41 @@
 AnimatedProgressBar
 ===================
 
-Android library for Animated progress bars. 
+**Android library for Animated progress bars.**  
+*Includes sample application.*
 
-includes sample application.
+Main Features
+-------------
+1. **Simple to use**
+    + *just 4 custom attributes can be passed through code or layout.xml*
+    + *It can be customized as every common progessbar* 
+2. **Resource frienly - even with multiple instances**, 
+    + *No matter how many insatnces are animating concurrently, there is low usage on device's resources (memory & cpu)* 
+3. **Compact library**
+    + *aar file less than 65kb*
+
 
 ![alt screenshot](https://raw.githubusercontent.com/DroidCoder/AnimatedProgressBar/master/Docs%20and%20pics/screenshot_1.png)
 
+Attributes' usage
+-----------------
+
+
+| Class | Attribute | type | default | behavior |
+| :----: | :----: | :----: | :----: | :----: |
+| progressbar | max | int | 100 | control of speed |
+| animatedprogressbar | animate_when_first_show | boolean | true | animation starts on attached to window |
+| animatedprogressbar | animation_loop | boolean | false | when progress reach max reset to 0 and animate again |
+| animatedprogressbar | animate_secondary_process | boolean | true | secondary process drawable is also animated |
+| animatedprogressbar | animate_secondary_process_step | int | 1 | when progess = secondary add step to secondary |
+| progressbar | progessDrawable | resource | device style | custom drawable to modify style of animatedprogressbar |
+
+
+
+
 License
-=======
-Copyright (c) 2014, Athanasios Karpouzis (http://droid-coder.com)  All rights reserved.
+-------
+Copyright (c) 2014, [Athanasios Karpouzis] (http://droid-coder.com) All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
