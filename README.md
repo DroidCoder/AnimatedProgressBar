@@ -7,10 +7,10 @@ AnimatedProgressBar
 Main Features
 -------------
 1. **Simple to use**
-    + *just 4 custom attributes can be passed through code or layout.xml*
+    + *Just 4 custom attributes can be passed through code or layout.xml*
     + *It can be customized as every common progessbar* 
-2. **Resource frienly - even with multiple instances**, 
-    + *No matter how many insatnces are animating concurrently, there is low usage on device's resources (memory & cpu)* 
+2. **Resource friendly - even with multiple instances**, 
+    + *No matter how many instances are animating concurrently, there is low usage on device's resources (memory & cpu)* 
 3. **Compact library**
     + *aar file less than 65kb*
 
