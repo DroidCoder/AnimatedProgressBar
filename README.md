@@ -1,5 +1,5 @@
 
-[![Analytics](https://ga-beacon.appspot.com/UA-63373429-3/AnimatedProgressBar/readme)](https://de.linkedin.com/in/karpouzis)
+![alt Analytics](https://ga-beacon.appspot.com/UA-63373429-3/AnimatedProgressBar/readme)
 
 AnimatedProgressBar
 ===================
